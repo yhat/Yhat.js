@@ -20,14 +20,14 @@ yhat.send({"beer": "Sierra Nevada Pale Ale"});
 
 #### Methods
 
-- **Get Started**
+- **Get Started:**
     Create a yhat instance with your *username* and *apikey* 
     
     ```
     var yhat = new Yhat('username', 'apikey');
     ```
 
-- **Initialization**
+- **Initialization:**
     The ```yhat.init``` function takes a url and an *optional* callback
     funtion. The callback function passes the variable ```data``` which is the
     JSON object passed back through the yhat API. For example:
@@ -40,18 +40,18 @@ yhat.send({"beer": "Sierra Nevada Pale Ale"});
     });
     ```
 
-- **Send**
+- **Send:**
     The send function, sends a json object via websockets, to the yhat API. 
 
     ```
     yhat.send({"beer": "Sierra Nevada Pale Ale"});
     ```
 
-- **Close**
+- **Close:**
     The close function, closes the socket.
 
     ```
-    yhat.close;
+    yhat.close();
     ```
 
 
