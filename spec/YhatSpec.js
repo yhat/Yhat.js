@@ -10,7 +10,9 @@ describe("Yhat", function() {
             yhat = new Yhat('sadfasdfasdfasdf', 'blahblahblah');
         });
         it("should throw an exception no user found", function() {
-             yhat.init('localhost:5000');
+            expect(function() {
+                yhat.init('localhost:5000');
+            }).toThrow("No user was found with the username given.");
         });
     });
 

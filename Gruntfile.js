@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'public/js/Yhat.min.js': ['src/Yhat.js']
+					'src/Yhat.min.js': ['src/Yhat.js']
 				}
 			}
 		},

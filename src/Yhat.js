@@ -6,6 +6,9 @@ function Yhat(username, apikey) {
 }
 
 Yhat.prototype.init = function(url, callback) {
+    window.y_username = this.username;
+    window.y_apikey = this.apikey;
+
     this.ws = new WebSocket("ws://"+url);
     this.ws.onmessage = function(evt) {
         var data = evt.data;
@@ -15,7 +18,8 @@ Yhat.prototype.init = function(url, callback) {
         }
     };
     this.ws.onopen = function(evt) {
-        this.send(JSON.stringify({ username: this.username, apikey: this.apikey }));
+        this.send(JSON.stringify({ username: window.y_username, apikey: window.y_apikey }));
+        console.log(this.readyState);
     };
 };
 
@@ -30,25 +34,19 @@ function checkErrors(msg){
     return true;
 }
 
-function authenticate(){
-    this.is_open = true;
-    this.ws.send(JSON.stringify({ username: this.username, apikey: this.apikey }));
-}
-
 Yhat.prototype.send = function(object) {
-    if (this.is_open){
-        this.ws.send(JSON.stringify(object));
-    }
-    
-    try {
-        this.ws.send(JSON.stringify(object));
-        this.is_open = true;
-    } catch (e) {
-        this.is_open = false;
-        throw new Error(e);
+    var websocket = this.ws;
+    if(websocket.readyState){
+        websocket.send(JSON.stringify(object));
+    } else {
+        setTimeout(function(){
+            websocket.send(JSON.stringify(object));
+        }, 1000);
     }
 };
 
 Yhat.prototype.close = function() {
     this.ws.close();
 };
+
+
