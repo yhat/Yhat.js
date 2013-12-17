@@ -2,7 +2,6 @@ function Yhat(username, apikey) {
     this.username = username;
     this.apikey = apikey;
     this.ws;
-    this.is_open = false;
 }
 
 Yhat.prototype.init = function(url, callback) {
@@ -26,9 +25,9 @@ Yhat.prototype.init = function(url, callback) {
 function checkErrors(msg){
     var msg = JSON.parse(msg);
     if (msg.error && msg.message){
-        //No user was found with the username given.
-        //The domain from which you are requesting access is not authorized by the username you provided.
-        //The API Key passed for the username is incorrect.
+        // No user was found with the username given.
+        // The domain from which you are requesting access is not authorized by the username you provided.
+        // The API Key passed for the username is incorrect.
         throw new Error(msg.message);
     }
     return true;
